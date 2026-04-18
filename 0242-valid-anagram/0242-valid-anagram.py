@@ -1,10 +1,20 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
         
+        s = s.lower()
+        t = t.lower()
+        s = s.replace(" ", "")
+        t = t.replace(" ", "")
+
+        counts = [0] * 26
+
         for char in s:
-            if s.count(char) != t.count(char):
+            counts[ord(char) - ord('a')] += 1
+        
+        for char in t :
+            counts[ord(char) - ord('a')] -= 1
+
+        for count in counts:
+            if count !=0:
                 return False
-            
         return True
